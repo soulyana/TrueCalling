@@ -6,11 +6,15 @@ import me.soulyana.truecalling.models.Skill;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
     Person findByUsername(String username);
 
     Person findByEmail(String email);
+
+    Set<Person> findAllByUsername(String username);
 
     Long countByUsername(String username);
 
@@ -20,4 +24,6 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
 
     //Find a particular user type with a certain skill. Displays list.
     Collection<Person> findBySkillsIsAndRolesIs(Skill skill, Role role);
+
+
 }

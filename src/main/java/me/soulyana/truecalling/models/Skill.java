@@ -22,12 +22,12 @@ public class Skill {
     @Size(min = 2, max = 50)
     private String skillRanking;
 
-    @ManyToMany(mappedBy = "skills", fetch = FetchType.LAZY)
-    private Set<Person> personSet;
+    @ManyToMany(mappedBy = "skills")
+    private Set<Person> person;
 
 
     public Skill() {
-        personSet = new HashSet<>();
+        person = new HashSet<>();
     }
 
     public long getId() {
@@ -54,11 +54,11 @@ public class Skill {
         this.skillRanking = skillRanking;
     }
 
-    public Set<Person> getPersonSet() {
-        return personSet;
+    public Set<Person> getPerson() {
+        return person;
     }
 
-    public void setPersonSet(Set<Person> personSet) {
-        this.personSet = personSet;
+    public void setPerson(Set<Person> person) {
+        this.person = person;
     }
 }

@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Person implements Comparable<Person> {
+public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,11 +38,14 @@ public class Person implements Comparable<Person> {
 
     private boolean enabled;
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "person")
     private Set<EdAchievement> edAchievements;
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "person")
     private Set<WorkExp> workExps;
+
+    @ManyToMany()
+    private Set<Skill> skills;
 
     //Use eager here in order to login
     //Role owns person
@@ -50,11 +53,6 @@ public class Person implements Comparable<Person> {
     @JoinTable(joinColumns = @JoinColumn(name = "PERSON_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<Role> roles;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(joinColumns = @JoinColumn(name = "PERSON_ID"),
-            inverseJoinColumns = @JoinColumn(name = "SKILL_ID"))
-    private Set<Skill> skills;
 
 
     //Constructor; use hash set because....
@@ -171,12 +169,6 @@ public class Person implements Comparable<Person> {
         return null;
     }
 
-    //Sort names in ascending order and compare by last name
-    @Override
-    public int compareTo(Person other) {
-        return getLastName().compareToIgnoreCase(other.getLastName());
-    }
-
     public void addSkill(Skill skill) {
         skills.add(skill);
     }
@@ -186,7 +178,5 @@ public class Person implements Comparable<Person> {
     }
 
 
-    // remove edAchievement
-    // remove workExp
 
 }

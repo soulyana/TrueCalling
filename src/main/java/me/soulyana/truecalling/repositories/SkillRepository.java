@@ -1,15 +1,19 @@
 package me.soulyana.truecalling.repositories;
 
+import me.soulyana.truecalling.models.Person;
 import me.soulyana.truecalling.models.Skill;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public interface SkillRepository extends CrudRepository<Skill, Long>{
-    //Does this one work better? Skill findBySkillIsAndSkillRankingIs(String skill, String skillRanking);
+
     Skill findBySkillAndSkillRanking(String skill, String skillRanking);
 
-    List<Skill> findAllByOrOrderBySkillAsc();
+    Set<Skill> findAllByPerson(Person person);
+
+    LinkedHashSet<Skill> findBySkill(String skill);
 
     long countAllById(long id);
 }

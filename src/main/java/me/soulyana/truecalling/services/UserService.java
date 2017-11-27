@@ -1,8 +1,7 @@
 package me.soulyana.truecalling.services;
 
 import me.soulyana.truecalling.models.Person;
-import me.soulyana.truecalling.repositories.PersonRepository;
-import me.soulyana.truecalling.repositories.RoleRepository;
+import me.soulyana.truecalling.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +12,18 @@ public class UserService {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    EdAchievementRepository edAchievementRepository;
+
+    @Autowired
+    SkillRepository skillRepository;
+
+    @Autowired
+    WorkExpRepository workExpRepository;
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     public UserService(PersonRepository personRepository) {
@@ -32,12 +43,12 @@ public class UserService {
     }
 
     public void saveRecruiter(Person person){
-        person.addRole(roleRepository.findByRole("ROLE_RECRUITER"));
+        person.addRole(roleRepository.findByRole("RECRUITER"));
         person.setEnabled(true);
         personRepository.save(person);
     }
     public void saveJobSeeker(Person person){
-       person.addRole(roleRepository.findByRole("ROLE_JOB_SEEKER"));
+        person.addRole(roleRepository.findByRole("JOB_SEEKER"));
         person.setEnabled(true);
         personRepository.save(person);
     }

@@ -53,10 +53,4 @@ public class Role {
     public void removePerson(Person user) {
         personSet.remove(user);
     }
-
-    //allows for comparing persons
-    @Override
-    public String toString() {
-        return role;
-    }
 }

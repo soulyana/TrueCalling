@@ -9,6 +9,5 @@ import java.util.Set;
 public interface RoleRepository extends CrudRepository<Role, Long> {
     Role findByRole(String role);
 
-    //What does the Is mean after PersonSet?
-    Set<Role> findAllByPersonSetIs(Person person);
+    Set<Role> findAllByPersonSet(Person person);
 }

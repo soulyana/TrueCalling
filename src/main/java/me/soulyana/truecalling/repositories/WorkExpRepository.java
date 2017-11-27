@@ -13,4 +13,6 @@ public interface WorkExpRepository extends CrudRepository<WorkExp, Long> {
     long countAllByPerson(Person person);
 
     LinkedHashSet<WorkExp> findByJobTitle(String jobTitle);
+
+    LinkedHashSet<WorkExp> findByCompanyName(String companyName);
 }
